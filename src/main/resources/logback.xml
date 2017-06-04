@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration scan="true" scanPeriod="60 seconds">
+
+    <property name="logFormat"  value="%d{yyyy-MM-dd HH:mm:ss.SSS, Asia/Shanghai} [%-5level] [%thread] [%logger{36}] - %msg%n"/>
+    <property name="prudent" value="false" />
+    <property name="LOG_HOME" value="logs/"/>
+
+    <timestamp key="byDay" datePattern="yyyy-MM-dd"/>
+    <timestamp key="byMinute" datePattern="yyyy-MM-dd'T'HHmm"/>
+    <timestamp key="bySecond" datePattern="yyyyMMdd'T'HHmmss"/>
+
+    <!-- ConsoleAppender 控制台输出日志 -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>DEBUG</level>
+        </filter>
+        <encoder>
+            <pattern>${logFormat}</pattern>
+        </encoder>
+    </appender>
+
+    <!-- RollingFileAppender 文件输出日志 -->
+    <!--<appender name="APP_INFO" class="ch.qos.logback.core.rolling.RollingFileAppender">-->
+        <!--<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">-->
+            <!--<pattern>${logFormat}</pattern>-->
+        <!--</encoder>-->
+
+        <!--<filter class="ch.qos.logback.classic.filter.ThresholdFilter">-->
+            <!--<level>DEBUG</level>-->
+        <!--</filter>-->
+
+        <!--<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">-->
+            <!--<FileNamePattern>${LOG_HOME}/test.%d{yyyy-MM-dd_HH-mm}.log</FileNamePattern>-->
+        <!--</rollingPolicy>-->
+    <!--</appender>-->
+
+    <logger name="org.apache.zookeeper" level="INFO"/>
+
+    <root level="DEBUG">
+        <appender-ref ref="STDOUT" />
+        <!--<appender-ref ref="APP_INFO"/>-->
+    </root>
+
+</configuration>
